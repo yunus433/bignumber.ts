@@ -1,0 +1,11 @@
+{
+  "name": "bignumber.ts",
+  "version": "1.0.0",
+  "description": "A native big decimal NPM library for typescript using BigInt class to support 18 digit floating point number arithmetics with high precision in the range -1e36 to 1e36, inclusive.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yunus Gürlek",
+  "license": "MIT"
+}
