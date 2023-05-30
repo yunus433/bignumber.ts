@@ -10,7 +10,7 @@ const
   LN_10 = '2.302585092994045684',
   LN_2 = '0.693147180559945309',
   NEGATIVE_INFINITY = BigInt('-1' + Array.from({ length: MAX_BYTES }, _ => '0').join('')),
-  PI = '3.1415926535897932',
+  PI = '3.141592653589793238',
   POSITIVE_INFINITY = BigInt('1' + Array.from({ length: MAX_BYTES }, _ => '0').join('')),
   PRECISION = BigInt('1' + Array.from({ length: PRECISION_BYTES }, _ => '0').join(''))
 ;
@@ -20,7 +20,7 @@ export class BigNumber {
   private _value: string;
   private _decimal: string;
 
-  // Private Utility Functions
+  // Private Utility Methods
 
   private static fixDecimalDigits(number: string): string {
     if (number.length >= PRECISION_BYTES)
@@ -149,8 +149,10 @@ export class BigNumber {
   };
 
   static fromString(
-    value: string
+    _value: string
   ): BigNumber {
+    const value = _value.split(',').join('.');
+
     let sign = true;
     let numberAsString = BigNumber.widenScientificNotation(value);
 
@@ -193,7 +195,7 @@ export class BigNumber {
   static LN_2: BigNumber = BigNumber.fromString(LN_2);
   static PI: BigNumber = BigNumber.fromString(PI);
 
-  // Type Conversion Functions
+  // Type Conversion Methods
 
   toBigInt(): bigint {
     return BigInt(this._sign ? 1 : -1) * (BigInt(this._value) + BigInt(this._decimal && this._decimal[0] && parseInt(this._decimal[0]) >= 5 ? 1 : 0))
@@ -207,7 +209,7 @@ export class BigNumber {
     return (this._sign ? '' : '-') + BigNumber.roundString(this._value + (this._decimal.length ? this._decimal[0] : ''), this._value.length);
   };
 
-  // Type Check Functions
+  // Type Check Methods
 
   isInteger(): boolean {
     return BigInt(this._decimal) == BigInt(0)
@@ -217,7 +219,7 @@ export class BigNumber {
     return this._sign
   };
 
-  // Arithmetic Conversion Functions
+  // Arithmetic Conversion Methods
 
   abs(): BigNumber {
     return new BigNumber(
@@ -271,7 +273,7 @@ export class BigNumber {
     );
   };
 
-  // Logic Comparison Functions
+  // Logic Comparison Methods
 
   equals(other: BigNumber): boolean {
     return this._sign == other._sign && this._value == other._value && this._decimal == other._decimal;
@@ -325,7 +327,7 @@ export class BigNumber {
     return this.lte(other);
   };
 
-  // Arithmetic Operation Functions
+  // Arithmetic Operation Methods
 
   add(other: BigNumber): BigNumber {
     const thisValueAsBigInt = BigInt(this._value);
