@@ -98,13 +98,13 @@ export class BigNumber {
 
     if (
       BigInt(value) > POSITIVE_INFINITY ||
-      (BigInt(value) == POSITIVE_INFINITY && BigInt(value) != BigInt(0))
+      (BigInt(value) == POSITIVE_INFINITY && BigInt(decimal) != BigInt(0))
     )
       throw Error(`BigNumber Error: You cannot have a BigNumber bigger than ${POSITIVE_INFINITY}.`);
 
     if (
       BigInt(value) < NEGATIVE_INFINITY ||
-      (BigInt(value) == NEGATIVE_INFINITY && BigInt(value) != BigInt(0))
+      (BigInt(value) == NEGATIVE_INFINITY && BigInt(decimal) != BigInt(0))
     )
       throw Error(`BigNumber Error: You cannot have a BigNumber smaller than ${NEGATIVE_INFINITY}.`);
 
