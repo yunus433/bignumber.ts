@@ -1,9 +1,5 @@
-// IMPORTANT NOTES
-// This is a BigNumber precision library for standard TS, it does not depend on or is not related to snarkyJS.
-// It is intended to support precision up to `PRECISION_BYTES` decimals in the range [NEGATIVE_INFINITY, POSITIVE_INFINITY], inclusive.
-
-const MAX_BYTES = 36; // Change this to increase the range.
-const PRECISION_BYTES = 18; // Change this to increase the precision.
+const MAX_BYTES = 36;
+const PRECISION_BYTES = 18;
 
 const
   E = '2.718281828459045235',
@@ -27,10 +23,6 @@ export class BigNumber {
       return number.substring(0, PRECISION_BYTES);
 
     return Array.from({ length: PRECISION_BYTES - number.length }, _ => '0').join('') + number;
-  };
-
-  private static precisionDigits(): string {
-    return '10' + Array.from({ length: PRECISION_BYTES }, _ => '0').join('')
   };
 
   private static roundString(_number: string, precision: number): string {
