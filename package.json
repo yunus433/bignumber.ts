@@ -1,6 +1,6 @@
 {
   "name": "typescript-bignumber",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A native big decimal NPM library for typescript using BigInt class to support 18 digit floating point number arithmetics with high precision in the range -1e36 to 1e36, inclusive.",
   "main": "index.ts",
   "scripts": {
