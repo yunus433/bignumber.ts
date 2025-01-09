@@ -20,7 +20,7 @@ export class BigNumber {
 
   private static fixDecimalDigits(number: string): string {
     if (number.length >= PRECISION_BYTES)
-      return number.substring(0, PRECISION_BYTES);
+      return BigNumber.roundString(number, PRECISION_BYTES);
 
     return Array.from({ length: PRECISION_BYTES - number.length }, _ => '0').join('') + number;
   };
@@ -366,8 +366,16 @@ export class BigNumber {
 
     const sign = this._sign == other._sign;
     const answer = (thisAsBigInt * otherAsBigInt).toString();
-    let value = answer.substring(0, answer.length - 2 * PRECISION_BYTES);
-    let decimal = BigNumber.roundString(answer.substring(answer.length - 2 * PRECISION_BYTES), PRECISION_BYTES);
+
+    let value, decimal;
+
+    if (answer.length <= 2 * PRECISION_BYTES) {
+      value = '0';
+      decimal = BigNumber.roundString(Array.from({ length: 2 * PRECISION_BYTES - answer.length }, _ => '0').join('') + answer, PRECISION_BYTES);
+    } else {
+      value = answer.substring(0, answer.length - 2 * PRECISION_BYTES);
+      decimal = BigNumber.roundString(answer.substring(answer.length - 2 * PRECISION_BYTES), PRECISION_BYTES);
+    }
 
     if (!value.length)
       value = '0';
